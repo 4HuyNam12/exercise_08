@@ -5,8 +5,8 @@ public class Main {
     public static void main(String[] args) {
         int randomNumber = randomNumber();
         System.out.println("Số ngẫu nhiên là: " + randomNumber);
-        boolean checkNumber = ischeckPrimeNumber(randomNumber);
-        if (!checkNumber) {
+        boolean isPrimeNumber = ischeckPrimeNumber(randomNumber);
+        if (!isPrimeNumber) {
             System.out.println("Số: " + randomNumber + " không phải là số nguyên tố");
         } else {
             System.out.println("Số: " + randomNumber + " là số nguyên tố");

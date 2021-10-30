@@ -4,9 +4,9 @@ import java.util.regex.Pattern;
 public class Main {
 
     public static void main(String[] args) {
-         emailValidator();
+         validateEmail();
     }
-    public static void emailValidator(){
+    public static void validateEmail(){
         System.out.println("Nhập vào email của bạn: ");
         Scanner sc = new Scanner(System.in);
         String email = sc.nextLine();
