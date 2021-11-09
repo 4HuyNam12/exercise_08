@@ -5,7 +5,6 @@ public class Main {
     public static void main(String[] args) {
         ProductRepository repo = new ProductRepository();
         ArrayList<Product> listProduct = repo.getData();
-        ListByCategory listCategory = new ListByCategory();
         Scanner sc = new Scanner(System.in);
         System.out.println("Mời bạn chọn 1 trong các chương trình sau: ");
         System.out.println("1-In thông tin tất cả các sản phẩm ra màn hình");
@@ -17,32 +16,41 @@ public class Main {
         System.out.println("0-Thoát chương trình");
         int n = sc.nextInt();
         switch (n) {
-            case 1 -> {
+            case 1:
                 System.out.println("Thông tin tất cả các sản phẩm: ");
                 repo.printList(listProduct);
-            }
-            case 2 -> {
+                break;
+
+            case 2:
                 System.out.println("Thông tin các sản phẩm có giá hơn 1 triệu: ");
                 repo.findProductByPrice(listProduct);
-            }
-            case 3 -> {
+                break;
+
+            case 3:
                 System.out.println("sắp xếp sản phẩm theo số lượng bán được: ");
                 repo.sortByQuantitySold(listProduct);
-            }
-            case 4 -> {
+                break;
+
+            case 4:
                 System.out.println("Thông tin sản phẩm bán chạy nhất: ");
                 repo.findBestQuantitySold(listProduct);
-            }
-            case 5 -> listCategory.printListByCategory();
-            case 6 -> {
-                boolean isCheck = listCategory.isCheckProductByName();
-                {
-                    if (!isCheck) {
-                        System.out.println("Không tìm thấy sản phẩm");
-                    }
+                break;
+
+            case 5:
+                Category listCategory = new Category();
+                listCategory.printListByCategory();
+                break;
+            case 6:
+                Product product = new Product();
+                boolean isCheck = product.findProductByName();
+            {
+                if (!isCheck) {
+                    System.out.println("Không tìm thấy sản phẩm");
                 }
             }
-            case 0 -> System.exit(1);
+            break;
+            case 0:
+                System.exit(1);
         }
     }
 }

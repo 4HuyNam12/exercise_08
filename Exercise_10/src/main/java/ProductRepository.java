@@ -1,13 +1,12 @@
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 public class ProductRepository {
     public ArrayList<Product> getData() {
@@ -36,7 +35,8 @@ public class ProductRepository {
                 System.out.println(p);
         }
     }
-    public void sortByQuantitySold(ArrayList<Product> list){
+
+    public void sortByQuantitySold(ArrayList<Product> list) {
         Collections.sort(list, new Comparator<Product>() {
             @Override
             public int compare(Product o1, Product o2) {
@@ -52,8 +52,7 @@ public class ProductRepository {
             public int compare(Product o1, Product o2) {
                 return (int) (o1.getQuantitySold() - o2.getQuantitySold());
             }
-    });
-        System.out.println(list.get(list.size()-1));
-
+        });
+        System.out.println(list.get(list.size() - 1));
     }
 }
