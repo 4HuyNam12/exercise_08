@@ -1,0 +1,12 @@
+[{"id":1,"name":"Android Tivi Sony 4K 70 inch","price":30000000,"category":"HOUSEWARE","quantity":538,"quantitySold":189},
+{"id":2,"name":"SamSung Washing Machine 9kg","price":9990000,"category":"HOUSEWARE","quantity":925,"quantitySold":470},
+{"id":3,"name":"Daikin Air Conditioners 120000BTU","price":15000000,"category":"HOUSEWARE","quantity":500,"quantitySold":227},
+{"id":4,"name":"Nike AirJordan1 Shoe","price":7500000,"category":"FASHION","quantity":161,"quantitySold":131},
+{"id":5,"name":"Adidas UltraBoost Shoe","price":3500000,"category":"FASHION","quantity":323,"quantitySold":113},
+{"id":6,"name":"Puma RSX shoe","price":1700000,"category":"FASHION","quantity":999,"quantitySold":603},
+{"id":7,"name":"MAC Lipstick","price":500000,"category":"COSMETICS","quantity":600,"quantitySold":268},
+{"id":8,"name":"SHU Lipstick","price":750000,"category":"COSMETICS","quantity":1000,"quantitySold":212},
+{"id":9,"name":"SunCream","price":200000,"category":"COSMETICS","quantity":463,"quantitySold":435},
+{"id":10,"name":"Salmon","price":1100000,"category":"FOOD","quantity":551,"quantitySold":472},
+{"id":11,"name":"Bread","price":20000,"category":"FOOD","quantity":1000,"quantitySold":494},
+{"id":12,"name":"Fresh milk","price":35000,"category":"FOOD","quantity":724,"quantitySold":666}]
