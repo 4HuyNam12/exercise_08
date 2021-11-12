@@ -15,6 +15,7 @@ public class Main {
         System.out.println("6-Tìm kiếm sản phẩm theo tên");
         System.out.println("0-Thoát chương trình");
         int n = sc.nextInt();
+        sc.nextLine();
         switch (n) {
             case 1:
                 System.out.println("Thông tin tất cả các sản phẩm: ");
@@ -41,14 +42,16 @@ public class Main {
                 listCategory.printListByCategory();
                 break;
             case 6:
-                Product product = new Product();
-                boolean isCheck = product.findProductByName();
-            {
-                if (!isCheck) {
-                    System.out.println("Không tìm thấy sản phẩm");
+                System.out.println("Mời bạn nhập tên sản phẩm cần tìm: ");
+                String name = sc.nextLine();
+                boolean isCheck = repo.findProductByName(name);
+                if (isCheck) {
+                    System.out.println("Tìm thấy sản phẩm: " + name);
+                    repo.printList(repo.listByName);
+                } else {
+                    System.out.println("Không tìm thấy sản phẩm: " + name);
                 }
-            }
-            break;
+                break;
             case 0:
                 System.exit(1);
         }

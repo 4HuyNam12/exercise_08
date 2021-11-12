@@ -1,7 +1,4 @@
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Product {
 
 
@@ -74,21 +71,6 @@ public class Product {
     public String formatMoney(long price) {
         DecimalFormat formatter = new DecimalFormat("###,###,###");
         return formatter.format(price);
-    }
-
-    public boolean findProductByName() {
-        ProductRepository repo = new ProductRepository();
-        ArrayList<Product> listByCategory = repo.getData();
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Mời bạn nhập tên sản phẩm cần tìm kiếm");
-        String name = sc.nextLine();
-        for (Product product : listByCategory) {
-            if (name.equalsIgnoreCase(product.getName())) {
-                System.out.println(product);
-                return true;
-            }
-        }
-        return false;
     }
 
 }

@@ -1,4 +1,4 @@
 enum CategoryEnum {
     COSMETICS, FASHION,
-    FOOD, HOUSEWARE
+    FOOD,HOUSEWARE
 }

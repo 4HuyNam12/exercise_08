@@ -9,6 +9,9 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class ProductRepository {
+    ArrayList<Product> listByCategory = getData();
+    ArrayList<Product> listByName = new ArrayList<>();
+
     public ArrayList<Product> getData() {
         ArrayList<Product> listProduct = new ArrayList<>();
         try {
@@ -34,6 +37,16 @@ public class ProductRepository {
             if (p.getPrice() >= 1000000)
                 System.out.println(p);
         }
+    }
+
+    public boolean findProductByName(String name) {
+        for (Product product : listByCategory) {
+            if (product.getName().equalsIgnoreCase(name)) {
+                listByName.add(product);
+                return true;
+            }
+        }
+        return false;
     }
 
     public void sortByQuantitySold(ArrayList<Product> list) {
