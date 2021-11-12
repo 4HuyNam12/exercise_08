@@ -7,6 +7,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class ProductRepository {
+    ArrayList<Product> listByName = new ArrayList<>();
+    ArrayList<Product> listProduct = getData();
         public ArrayList<Product> getData() {
             ArrayList<Product> listProduct = new ArrayList<>();
             try {
@@ -24,5 +26,14 @@ public class ProductRepository {
         for (Product p:list) {
             System.out.println(p);
         }
+    }
+    public boolean findProDuctByName(String name) {
+        for (Product p:listProduct) {
+            if (p.getName().equalsIgnoreCase(name)) {
+                listByName.add(p);
+                return true;
+            }
+        }
+        return false;
     }
 }

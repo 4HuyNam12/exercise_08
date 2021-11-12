@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         ProductRepository repo = new ProductRepository();
-        Category category = new Category();
+        Category category= new Category();
         Scanner sc = new Scanner(System.in);
         int choice;
         do {
@@ -25,16 +26,21 @@ public class Main {
                 int choiceCategory = sc.nextInt();
                 if (choiceCategory == 1) {
                     System.out.println("Thông tin sản phẩm theo danh mục: ĐIỆN_THOẠI");
-                    repo.printList(category.listByPhone());
+                    ArrayList<Product> listPhone =category.listByCategory(CategoryEnum.ĐIỆN_THOẠI);
+                    repo.printList(listPhone);
                 } else if (choiceCategory == 2) {
                     System.out.println("Thông tin sản phẩm theo danh mục: APPLE");
-                    repo.printList(category.listByApple());
+                    ArrayList<Product> listAPPLE =category.listByCategory(CategoryEnum.APPLE);
+                    repo.printList(listAPPLE);
                 } else if (choiceCategory == 3) {
                     System.out.println("Thông tin sản phẩm theo danh mục: LAPTOP");
-                    repo.printList(category.listByLapTop());
+                    ArrayList<Product> listPhone =category.listByCategory(CategoryEnum.LAPTOP);
+                    repo.printList(listPhone);
                 } else if (choiceCategory == 4) {
                     System.out.println("Thông tin sản phẩm theo danh mục: PHỤ_KIỆN");
-                    repo.printList(category.listByAccessory());
+                    ArrayList<Product> listAccessory =category.listByCategory(CategoryEnum.PHỤ_KIỆN);
+
+                    repo.printList(listAccessory);
                 } else {
                     System.out.println("Lựa chọn không phù hợp");
                 }
@@ -53,26 +59,33 @@ public class Main {
                 int choiceBrand = sc.nextInt();
                 if (choiceBrand == 1) {
                     System.out.println("Thông tin sản phẩm hãng APPLE");
-                    repo.printList(brand.listByApple());
+                    ArrayList<Product> listApple=brand.listByBrand(BrandEnum.APPLE);
+                    repo.printList(listApple);
 
                 } else if (choiceBrand == 2) {
                     System.out.println("Thông tin sản phẩm hãng SAMSUNG");
-                    brand.listBySamSung();
+                    ArrayList<Product> listSamSung = brand.listByBrand(BrandEnum.SAMSUNG);
+                    repo.printList(listSamSung);
                 } else if (choiceBrand == 3) {
                     System.out.println("Thông tin sản phẩm hãng XIAOMI");
-                    brand.listByXiaomi();
+                    ArrayList<Product> listXIAOMI = brand.listByBrand(BrandEnum.XIAOMI);
+                    repo.printList(listXIAOMI);
                 } else if (choiceBrand == 4) {
                     System.out.println("Thông tin sản phẩm hãng DELL");
-                    brand.listByDeLL();
+                    ArrayList<Product> listDELL = brand.listByBrand(BrandEnum.DELL);
+                    repo.printList(listDELL);
                 } else if (choiceBrand == 5) {
                     System.out.println("Thông tin sản phẩm hãng ASUS");
-                    brand.listByASUS();
+                    ArrayList<Product> listASUS = brand.listByBrand(BrandEnum.ASUS);
+                    repo.printList(listASUS);
                 } else if (choiceBrand == 6) {
                     System.out.println("Thông tin sản phẩm hãng OPPO");
-                    brand.listByOPPO();
+                    ArrayList<Product> listOPPO = brand.listByBrand(BrandEnum.OPPO);
+                    repo.printList(listOPPO);
                 } else if (choiceBrand == 7) {
                     System.out.println("Thông tin sản phẩm hãng HUAWEI");
-                    brand.listByHuawei();
+                    ArrayList<Product> listHUAWEI = brand.listByBrand(BrandEnum.HUAWEI);
+                    repo.printList(listHUAWEI);
                 } else {
                     System.out.println("Lựa chọn không phù hợp");
                 }
@@ -111,15 +124,16 @@ public class Main {
             case 4:
                 System.out.println("Nhập vào tên sản phẩm cần tìm kiếm: ");
                 String name = sc.nextLine();
-                boolean ischeck = category.findProDuctByName(name);
+                boolean ischeck = repo.findProDuctByName(name);
                 if (ischeck) {
                     System.out.println("Tìm thấy sản phẩm: " + name);
-                    repo.printList(category.listByName);
+                    repo.printList(repo.listByName);
                 } else {
                     System.out.println("Không tìm thấy sản phẩm.");
                 }
                 break;
         }
+
     }
 }
 
