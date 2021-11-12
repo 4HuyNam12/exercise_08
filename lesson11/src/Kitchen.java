@@ -1,5 +1,10 @@
+import java.util.ArrayList;
+
 public class Kitchen extends Employee {
-    long serviceCharge;
+    private long serviceCharge;
+
+    public Kitchen() {
+    }
 
     public Kitchen(int id, String name, int age, long basicSalary, long serviceCharge) {
         super(id, name, age, basicSalary);
@@ -17,6 +22,13 @@ public class Kitchen extends Employee {
     @Override
     public long calculatorSalary() {
         return basicSalary + serviceCharge;
+    }
+
+
+    public void printList(ArrayList<Kitchen> list) {
+        for (Kitchen k:list) {
+            System.out.println(k);
+        }
     }
 
     @Override

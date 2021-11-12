@@ -1,6 +1,10 @@
+import java.util.ArrayList;
+
 public class Waiter extends Employee {
     long compensate;
 
+    public Waiter() {
+    }
 
     public Waiter(int id, String name, int age, long basicSalary, long compensate) {
         super(id, name, age, basicSalary);
@@ -18,6 +22,13 @@ public class Waiter extends Employee {
     @Override
     public long calculatorSalary() {
         return (basicSalary + compensate);
+    }
+
+
+    public void printList(ArrayList<Waiter> list) {
+        for (Waiter w:list) {
+            System.out.println(w);
+        }
     }
 
     @Override

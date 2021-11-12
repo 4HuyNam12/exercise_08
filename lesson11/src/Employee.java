@@ -1,10 +1,14 @@
 import java.text.DecimalFormat;
 
+
 public abstract class Employee {
     int id;
     String name;
     int age;
     long basicSalary;
+
+    public Employee() {
+    }
 
     public Employee(int id, String name, int age, long basicSalary) {
         this.id = id;
