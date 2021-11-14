@@ -11,7 +11,7 @@ public class Main {
             System.out.println("Mời bạn chọn chương trình:");
             System.out.println("1-In thông tin sản phẩm theo danh mục.");
             System.out.println("2-In thông tin sản phẩm theo hãng.");
-            System.out.println("3-In thông tin sản phẩm theo mức giá và danh mục.");
+            System.out.println("3-In thông tin sản phẩm theo mức giá.");
             System.out.println("4-Tìm kiếm thông tin sản phẩm theo tên.");
             choice = sc.nextInt();
             sc.nextLine();
@@ -92,7 +92,6 @@ public class Main {
                 break;
 
             case 3:
-                ProductPrice productByPrice = new ProductPrice();
                 System.out.println("Mời bạn lựa chọn thông tin mức giá :");
                 System.out.println("1-Sản phẩm giá dưới 2 triệu đồng :");
                 System.out.println("2-Sản phẩm giá từ 2 đến 4 triệu đồng :");
@@ -102,20 +101,25 @@ public class Main {
                 int priceChoice = sc.nextInt();
                 if (priceChoice == 1) {
                     System.out.println("Các sản phẩm giá dưới 2 triệu đồng :");
-                    repo.printList(productByPrice.printPriceBelow2M());
+                    ArrayList<Product> priceBelow2M = repo.printProductByPrice(0,1900000);
+                    repo.printList(priceBelow2M);
 
                 } else if (priceChoice == 2) {
                     System.out.println("Các sản phẩm giá từ 2 đến 4 triệu đồng :");
-                    repo.printList(productByPrice.printPriceFrom2to4M());
+                    ArrayList<Product> priceBelow2M = repo.printProductByPrice(2000000,4000000);
+                    repo.printList(priceBelow2M);
                 } else if (priceChoice == 3) {
                     System.out.println("Các sản phẩm giá từ 4 đến 7 triệu đồng :");
-                    repo.printList(productByPrice.printPriceFrom4to7M());
+                    ArrayList<Product> priceFrom2to4M = repo.printProductByPrice(4000000,7000000);
+                    repo.printList(priceFrom2to4M);
                 } else if (priceChoice == 4) {
                     System.out.println("Các sản phẩm giá từ 7 đến 13 triệu đồng :");
-                    repo.printList(productByPrice.printPriceFrom7to13m());
+                    ArrayList<Product> priceFrom4to7M = repo.printProductByPrice(7000000,13000000);
+                    repo.printList(priceFrom4to7M);
                 } else if (priceChoice == 5) {
                     System.out.println("Các sản phẩm giá trên 13 triệu đồng :");
-                    repo.printList(productByPrice.printPriceUp13M());
+                    ArrayList<Product> priceBelow2M = repo.printProductByPrice(13000000,1000000000);
+                    repo.printList(priceBelow2M);
                 } else {
                     System.out.println("Lựa chọn không phù hợp");
                     System.exit(1);
@@ -124,16 +128,15 @@ public class Main {
             case 4:
                 System.out.println("Nhập vào tên sản phẩm cần tìm kiếm: ");
                 String name = sc.nextLine();
-                boolean ischeck = repo.findProDuctByName(name);
-                if (ischeck) {
+                ArrayList<Product> listByName = repo.findProDuctByName(name);
+                if (!listByName.isEmpty()) {
                     System.out.println("Tìm thấy sản phẩm: " + name);
-                    repo.printList(repo.listByName);
+                    repo.printList(listByName);
                 } else {
                     System.out.println("Không tìm thấy sản phẩm.");
                 }
                 break;
         }
-
     }
 }
 
