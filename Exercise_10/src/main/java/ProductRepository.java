@@ -7,10 +7,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Locale;
 
 public class ProductRepository {
-    ArrayList<Product> listByCategory = getData();
-    ArrayList<Product> listByName = new ArrayList<>();
 
     public ArrayList<Product> getData() {
         ArrayList<Product> listProduct = new ArrayList<>();
@@ -39,14 +38,15 @@ public class ProductRepository {
         }
     }
 
-    public boolean findProductByName(String name) {
-        for (Product product : listByCategory) {
-            if (product.getName().equalsIgnoreCase(name)) {
-                listByName.add(product);
-                return true;
+    public ArrayList findProductByName(String name) {
+        ArrayList<Product> listByCategory = getData();
+        ArrayList<Product> listByName = new ArrayList<>();
+        for (Product p : listByCategory) {
+            if (p.getName().toUpperCase(Locale.ROOT).contains(name.toUpperCase())) {
+                listByName.add(p);
             }
         }
-        return false;
+        return listByName;
     }
 
     public void sortByQuantitySold(ArrayList<Product> list) {

@@ -21,35 +21,37 @@ public class Main {
                 System.out.println("Thông tin tất cả các sản phẩm: ");
                 repo.printList(listProduct);
                 break;
-
             case 2:
                 System.out.println("Thông tin các sản phẩm có giá hơn 1 triệu: ");
                 repo.findProductByPrice(listProduct);
                 break;
-
             case 3:
                 System.out.println("sắp xếp sản phẩm theo số lượng bán được: ");
                 repo.sortByQuantitySold(listProduct);
                 break;
-
             case 4:
                 System.out.println("Thông tin sản phẩm bán chạy nhất: ");
                 repo.findBestQuantitySold(listProduct);
                 break;
-
             case 5:
                 Category listCategory = new Category();
-                listCategory.printListByCategory();
+                listCategory.printListByCategory(CategoryEnum.COSMETICS);
+                System.out.println();
+                listCategory.printListByCategory(CategoryEnum.HOUSEWARE );
+                System.out.println();
+                listCategory.printListByCategory(CategoryEnum.FOOD);
+                System.out.println();
+                listCategory.printListByCategory(CategoryEnum.FASHION);
                 break;
             case 6:
                 System.out.println("Mời bạn nhập tên sản phẩm cần tìm: ");
                 String name = sc.nextLine();
-                boolean isCheck = repo.findProductByName(name);
-                if (isCheck) {
-                    System.out.println("Tìm thấy sản phẩm: " + name);
-                    repo.printList(repo.listByName);
-                } else {
+                ArrayList<Product> listByName = repo.findProductByName(name);
+                if (listByName.isEmpty()) {
                     System.out.println("Không tìm thấy sản phẩm: " + name);
+                } else {
+                    System.out.println("Tìm thấy sản phẩm: " + name);
+                    repo.printList(listByName);
                 }
                 break;
             case 0:
