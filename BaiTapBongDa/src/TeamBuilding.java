@@ -13,9 +13,9 @@ public class TeamBuilding {
     public ArrayList<Player> addPlayer(int numberOfPlayers, PositionEnum position) {
         ArrayList<Player> listPlayersByPosition = new ArrayList<>();
         do {
-            int random = usingRandom(1, 24);
+            int randomNumber = usingRandom(1, 24);
             for (Player p : allPlayers) {
-                if (p.getNumber() == (random)) {
+                if (p.getNumber() == (randomNumber)) {
                     if (p.getPosition().equals(position)&&!listPlayersByPosition.contains(p)) {
                         listPlayersByPosition.add(p);
                     }
@@ -30,16 +30,10 @@ public class TeamBuilding {
         ArrayList<Player> dfList =addPlayer(dfNumber, PositionEnum.DF);
         ArrayList<Player> mfList =addPlayer(mfNumber, PositionEnum.MF);
         ArrayList<Player> fwList =addPlayer(fwNumber, PositionEnum.FW);
-        selectedPlayers.add(gkList.get(gkNumber - 1));
-        for (int i = 0; i < dfNumber; i++) {
-            selectedPlayers.add(dfList.get(i));
-        }
-        for (int i = 0; i < mfNumber; i++) {
-            selectedPlayers.add(mfList.get(i));
-        }
-        for (int i = 0; i < fwNumber; i++) {
-            selectedPlayers.add(fwList.get(i));
-        }
+        selectedPlayers.addAll(gkList);
+        selectedPlayers.addAll(dfList);
+        selectedPlayers.addAll(mfList);
+        selectedPlayers.addAll(fwList);
         return selectedPlayers;
     }
 }
