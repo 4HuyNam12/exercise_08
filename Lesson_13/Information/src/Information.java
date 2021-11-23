@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Information {
@@ -35,7 +36,8 @@ public class Information {
     }
 
     public void calculateAge() {
-        int age = 2021 - yearOfBirth;
+        LocalDate localDate = LocalDate.now();
+        int age = localDate.getYear() - yearOfBirth;
         if (age >= 18) {
             System.out.println("Bạn đã " + age + " tuổi . Mời bạn đi bầu cử.");
         } else {
