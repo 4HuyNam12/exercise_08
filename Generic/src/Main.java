@@ -7,14 +7,14 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Repository repo = new Repository();
         ArrayList<? extends Employee> listEmployees;
+        String listChoices = "Mời lựa chọn chương trình :\n" +
+                "1: Quản lý danh sách bồi bàn.\n" +
+                "2: Quản lý danh sách nhân viên đứng bếp.\n" +
+                "3: Thoát chương trình\n" +
+                "      Lựa chọn:";
         int choose = 0;
         boolean ischeck = false;
-        System.out.println("""
-                Mời lựa chọn chương trình :
-                1: Quản lý danh sách bồi bàn.
-                2: Quản lý danh sách nhân viên đứng bếp.
-                3: Thoát chương trình
-                 Lựa chọn:""");
+        System.out.println(listChoices);
         while (!ischeck) {
             try {
                 choose = Integer.parseInt(scanner.nextLine());
@@ -23,12 +23,7 @@ public class Main {
                 ischeck = true;
             } catch (Exception e) {
                 System.out.println("Lựa chọn phải là 1 số nguyên từ 1 đến 3");
-                System.out.println("""
-                        Mời chọn lại chương trình :
-                        1: Quản lý danh sách bồi bàn.
-                        2: Quản lý danh sách nhân viên đứng bếp.
-                        3: Thoát chương trình
-                         Lựa chọn:""");
+                System.out.println(listChoices);
             }
         }
         switch (choose) {
