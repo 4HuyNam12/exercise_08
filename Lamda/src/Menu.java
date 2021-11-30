@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 public class Menu {
     Scanner sc = new Scanner(System.in);
-    Login login = new Login();
+    Transaction transaction = new Transaction();
+    TransactionHistory transactionHistory = new TransactionHistory();
     long accountBalance = 5000000;
     String description = null;
     long accountNumber = 0;
@@ -37,12 +38,15 @@ public class Menu {
             case 2 -> {
                 System.out.println("Nhập vào tên ngân hàng muốn chuyển đến: ");
                 String bankName = sc.nextLine();
-                description = login.enterDescription();
-                accountNumber = login.enterAccountNumber();
-                moneyNumber = login.enterMoneyNumber(accountBalance);
+                description = transaction.enterDescription();
+                accountNumber = transaction.enterAccountNumber();
+                moneyNumber = transaction.enterMoneyNumber(accountBalance);
                 int confirm = 0;
                 do {
-                    System.out.println("Thực hiện chuyển tiền:" + "\n-1 Đồng ý" + "\n2-Hủy bỏ giao dịch");
+                    System.out.println("""
+                            Thực hiện chuyển tiền:
+                            1- Đồng ý
+                            2- Hủy bỏ giao dịch""");
                     try {
                         confirm = Integer.parseInt(sc.nextLine());
                     } catch (Exception e) {
@@ -51,7 +55,7 @@ public class Menu {
                 } while (confirm > 2 || confirm <= 0);
                 if (confirm == 1) {
                     System.out.println("Chuyển tiền thành công ,giao dịch đã được lưu vào lịch sử giao dịch");
-                    mapHistory = login.addTransactionHistory(description, accountNumber, moneyNumber);
+                    mapHistory = transactionHistory.addTransactionHistory(description, accountNumber, moneyNumber);
                     accountBalance -= moneyNumber;
                 } else {
                     System.out.println("Hủy bỏ giao dịch");
@@ -63,9 +67,7 @@ public class Menu {
                     System.out.println("Lịch sử giao dịch trống ,hãy thực hiện giao dịch");
                 } else {
                     System.out.println("Lịch sử giao dịch:");
-                    mapHistory.forEach((key, value) -> {
-                        System.out.println(key + " - " + value);
-                    });
+                    mapHistory.forEach((key, value) -> System.out.println(key + " - " + value));
                 }
             }
         }

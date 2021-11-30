@@ -1,9 +1,13 @@
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TransactionHistory {
+    public TransactionHistory() {
+    }
+    Map<Integer, TransactionHistory> mapHistory = new HashMap<>();
     private LocalDate date;
     private String description;
     private long accountNumber;
@@ -54,12 +58,16 @@ public class TransactionHistory {
     }
 
     public String formatDate(LocalDate date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        return dateFormat.format(new Date());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return date.format(formatter);
     }
 
     @Override
     public String toString() {
         return formatDate(date) + " - " + description + " - " + accountNumber + " - " + formatMoney(moneyNumber);
+    }
+    public HashMap<Integer, TransactionHistory> addTransactionHistory(String description, long accountNumber, long moneyNumber) {
+        mapHistory.put(mapHistory.size() + 1, new TransactionHistory(LocalDate.now(), description, accountNumber, moneyNumber));
+        return (HashMap<Integer, TransactionHistory>) mapHistory;
     }
 }
