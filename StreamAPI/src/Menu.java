@@ -37,7 +37,7 @@ public class Menu {
             }
             case "2" -> {
                 System.out.println("3 bộ phim có lượt xem cao nhất: ");
-                movieService.listByView(allMovies);}
+                movieService.listByView(allMovies,3);}
             case "3" -> {
                 System.out.println("Danh sách phim danh mục : Movie");
                 movieService.listByCategory(allMovies,CategoryEnum.MOVIE);
