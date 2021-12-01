@@ -46,6 +46,7 @@ public class Movie {
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
     }
+
     public String getGenre() {
         return genre;
     }
@@ -77,6 +78,7 @@ public class Movie {
     public void setLength(int length) {
         this.length = length;
     }
+
     public String formatView(long movieView) {
         DecimalFormat myformat = new DecimalFormat("###,###,###");
         return myformat.format(movieView);

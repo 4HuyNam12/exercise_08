@@ -1,3 +1,3 @@
 public enum CategoryEnum {
-    TV_Show,Movie
+    TV_SHOW, MOVIE
 }

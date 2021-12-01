@@ -6,9 +6,9 @@ public class Menu {
     public void menuList() {
         Scanner sc = new Scanner(System.in);
         MovieReposỉtory repo = new MovieReposỉtory();
-        LinkedList<Movie> allMovies = new LinkedList<Movie>();
+        LinkedList<Movie> allMovies;
         allMovies = repo.listMovie();
-        Service service = new Service(
+        MovieService movieService = new MovieService(
         );
         String pattern = "^[0-4]";
         String menu = """
@@ -24,45 +24,45 @@ public class Menu {
             System.out.println(menu);
             try {
                 choice = sc.nextLine();
-                if (!Pattern.matches(pattern, choice)) throw new Exception() ;
+                if (!Pattern.matches(pattern, choice)) throw new Exception("Lựa chọn không đúng , vui lòng chọn lại!") ;
                 ischeck = true;
             } catch (Exception e) {
-                System.out.println("Lựa chọn không đúng , vui lòng chọn lại!");
+                System.out.println(e.getMessage());
             }
         }while(!ischeck);
         switch (choice) {
             case "1" -> {
                 System.out.println("Hiển thị tất cả các bộ phim:");
-                service.listAllMovie(allMovies);
+                movieService.listAll(allMovies);
             }
             case "2" -> {
                 System.out.println("3 bộ phim có lượt xem cao nhất: ");
-                service.listByView(allMovies);}
+                movieService.listByView(allMovies);}
             case "3" -> {
                 System.out.println("Danh sách phim danh mục : Movie");
-                service.listByCategory(allMovies,CategoryEnum.Movie);
+                movieService.listByCategory(allMovies,CategoryEnum.MOVIE);
                 System.out.println();
                 System.out.println("Danh sách phim theo thể loại : TV SHOW");
-                service.listByCategory(allMovies,CategoryEnum.TV_Show);
+                movieService.listByCategory(allMovies,CategoryEnum.TV_SHOW);
             }
             case "4" ->{
                 System.out.println("Danh sách phim theo thể loại: Hành động. ");
-                service.listByGenres(allMovies,"Hành động");
+                movieService.listByGenres(allMovies,"Hành động");
                 System.out.println();
                 System.out.println("Danh sách phim theo thể loại: Kịch tính.");
-                service.listByGenres(allMovies,"Kịch tính");
+                movieService.listByGenres(allMovies,"Kịch tính");
                 System.out.println();
                 System.out.println("Danh sách phim theo thể loại: Lãng mạn. ");
-                service.listByGenres(allMovies,"Lãng mạn");
+                movieService.listByGenres(allMovies,"Lãng mạn");
                 System.out.println();
                 System.out.println("Danh sách phim theo thể loại: Tình cảm. ");
-                service.listByGenres(allMovies,"Hài hước");
+                movieService.listByGenres(allMovies,"Hài hước");
                 System.out.println();
                 System.out.println("Danh sách phim theo thể loại: Xuyên không. ");
-                service.listByGenres(allMovies,"Xuyên không");
+                movieService.listByGenres(allMovies,"Xuyên không");
                 System.out.println();
                 System.out.println("Danh sách phim theo thể loại: Hài hước. ");
-                service.listByGenres(allMovies,"Hài hước");
+                movieService.listByGenres(allMovies,"Hài hước");
             }
 
         }
