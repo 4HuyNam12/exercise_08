@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 
 public class ThreadService extends Thread{
-    MovieReposỉtory repo = new MovieReposỉtory();
+    MovieRepository repo = new MovieRepository();
     LinkedList<Movie> allMovies = repo.listMovies();
     MovieService movieService = new MovieService(
     );
