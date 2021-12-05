@@ -1,109 +1,101 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class UserService {
     Scanner sc = new Scanner(System.in);
-    UserRepository repo = new UserRepository();
-    MenuList menu = new MenuList();
-    ArrayList<User> listAll = repo.listAll();
-    String emailRegex = "^(.+)@(\\\\S+)$";
-    String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[.,-_;])(?=\\S+$).{7,15}$";
-    public boolean login() {
+    String email = null;
+    String userName = null;
+    String password = null;
+    Input input = new Input();
+
+    public String login(ArrayList<User> listAll) {
+        String userName;
         boolean ischeck = false;
-        String userName =null;
         do {
             System.out.println("Nhập userName: ");
             userName = sc.nextLine();
-            String password;
             for (User user : listAll) {
-                if (userName.equals(user.getUserName())) {
-                    System.out.println("Nhập password");
+                listAll.stream().forEach(e-> System.out.println(e));
+                if (!userName.equals(user.getUserName())) {
+                    System.out.println("Bạn đã nhập sai userName");
+                } else {
+                    System.out.println("Nhập mật khẩu");
                     password = sc.nextLine();
-                    if (password.equals(user.getPassword())) {
-                        System.out.println("Chào mừng:" + userName);
+                    if (!password.equals(user.getPassword())) {
+                        System.out.println("Bạn đã nhập sai mật khẩu");
+                        System.out.println("Mời lựa chọn");
+                        System.out.println("1-Đăng nhập lại");
+                        System.out.println("2-Quên mật khẩu");
+                        int choice = Integer.parseInt(sc.nextLine());
+                        switch (choice) {
+                            case 1 -> System.out.println("Đăng nhập lại");
+                            case 2 -> forgotPassword(listAll);
+                        }
+                    } else {
+                        System.out.println("Chào mừng: " + userName);
                         ischeck = true;
                     }
                 }
+                break;
             }
-        }while (!ischeck) ;
-            return false;
-       }
+        }
+        while (!ischeck);
+        return userName;
+    }
 
-
-
-    public void forgotPassword() {
+    public void forgotPassword(ArrayList<User> listAll) {
+        MenuList menuList = new MenuList();
         System.out.println("Mời bạn nhập email đăng ký: ");
-        String email = sc.nextLine();
-        for (int i = 0; i < listAll.size(); i++) {
-            if (email.equals(listAll.get(i).getEmail())) {
-                System.out.println("Chào mừng :" + listAll.get(i).getUserName());
-                System.out.println("Mời bạn nhập mật khẩu mới: ");
-                String password = sc.nextLine();
-                listAll.get(i).setPassword(password);
+        email = sc.nextLine();
+        for (User user : listAll) {
+            if (!email.equals(user.getEmail())) {
+                System.out.println("Chưa tồn tại tài khoản!");
             } else {
-                System.out.println("Chưa tồn tại tài khoản");
+                System.out.println("Chào mừng :" + user.getUserName());
+                password = input.enterPassword();
+                System.out.println("Thay đổi mật khẩu thành công.");
+                user.setUserName(user.getUserName());
+                user.setEmail(email);
+                user.setPassword(password);
+                menuList.menu(listAll);
             }
+            break;
         }
     }
 
-    public void createNewAccount() {
-        String userName = enterUsername();
-        String email=enterEmail();
-        String password=null;
-            for (int i = 0; i < listAll.size(); i++) {
-                if (email.equals(listAll.get(i).getEmail())) {
-                    System.out.println("email đã được sử dụng , mời bạn nhập email khác");
-                }else
-                    password=enterPassword();
-            }
-        listAll.add(new User(userName,email,password));
-    }
-    public String enterUsername() {
-        System.out.println("Mời bạn nhập tên tài khoản:");
-        return sc.nextLine();
-    }
-    public String enterPassword() {
-        boolean ischeck = false;
-        String password =null;
-        do {
-            try {
-                System.out.println("Mời bạn nhập mật khẩu:");
-                 password = sc.nextLine();
-                if (!Pattern.matches(password, passwordRegex)) throw new Exception("Sai định dạng mật khẩu , vui lòng nhập lại") ;
-                ischeck = true;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }while(!ischeck);
-        return password;
-    }
-    public String enterEmail() {
-        String email=null ;
+    public void createNewAccount(ArrayList<User> listAll) {
+        userName = input.enterUsername();
         boolean ischeck = false;
         do {
-            try {
-                System.out.println("Mời bạn nhập email:");
-                email = sc.nextLine();
-                if (!Pattern.matches(email, emailRegex)) throw new Exception("Sai định dạng email , vui lòng nhập lại") ;
-                ischeck = true;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+            email = input.enterEmail();
+            for (User user : listAll) {
+                if (email.equals(user.getEmail())) {
+                    System.out.println("email đã được sử dụng , vui lòng nhập lại.");
+                    ischeck = false;
+                } else {
+                    ischeck = true;
+                }
             }
-        }while(!ischeck);
-        return email;
+        } while (!ischeck);
+        password = input.enterPassword();
+        System.out.println("Chúc mừng bạn đã đăng ký thành công !");
+        User user = new User(userName,email,password);
+        listAll.add(user);
 
     }
-    public void changeEmail(String userName) {
-        String enterEmail = enterEmail();
+
+
+    public void changeEmail(String userName, ArrayList<User> listAll) {
+        String enterEmail = input.enterEmail();
         for (User user : listAll) {
             if (userName.equals(user.getUserName())) {
                 user.setEmail(enterEmail);
             }
         }
     }
-    public void changePassword(String userName) {
-        String password = enterPassword();
+
+    public void changePassword(String userName, ArrayList<User> listAll) {
+        String password = input.enterPassword();
         for (User user : listAll) {
             if (userName.equals(user.getUserName())) {
                 user.setPassword(password);
@@ -111,14 +103,14 @@ public class UserService {
         }
     }
 
-    public void changeUser(String userName) {
-        String newUserName = enterUsername();
+    public void changeUser(String userName, ArrayList<User> listAll) {
+        String newUserName = input.enterUsername();
         for (User user : listAll) {
             if (userName.equals(user.getUserName())) {
                 user.setUserName(newUserName);
             }
-
         }
     }
+
 }
 
