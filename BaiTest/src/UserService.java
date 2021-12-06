@@ -3,19 +3,16 @@ import java.util.Scanner;
 
 public class UserService {
     Scanner sc = new Scanner(System.in);
-    String email = null;
-    String userName = null;
-    String password = null;
+    String userName ;
+    String email ;
+    String password;
     Input input = new Input();
 
     public String login(ArrayList<User> listAll) {
-        String userName;
         boolean ischeck = false;
         do {
-            System.out.println("Nhập userName: ");
-            userName = sc.nextLine();
+            userName = input.enterUsername();
             for (User user : listAll) {
-                listAll.stream().forEach(e-> System.out.println(e));
                 if (!userName.equals(user.getUserName())) {
                     System.out.println("Bạn đã nhập sai userName");
                 } else {
@@ -79,8 +76,7 @@ public class UserService {
         } while (!ischeck);
         password = input.enterPassword();
         System.out.println("Chúc mừng bạn đã đăng ký thành công !");
-        User user = new User(userName,email,password);
-        listAll.add(user);
+        listAll.add(new User(userName,email,password));
 
     }
 
