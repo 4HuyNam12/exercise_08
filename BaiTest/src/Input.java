@@ -5,16 +5,16 @@ public class Input {
     Scanner sc = new Scanner(System.in);
     String EMAIL_REGEX = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
     String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[.-_!@#&()–[{}]:;',?/*~$^+=<>]).{7,15}$";
+
     public String enterUsername() {
         System.out.println("Mời bạn nhập tên tài khoản:");
         return sc.nextLine();
     }
 
     public String enterPassword() {
-        String password=null;
+        String password = null;
         boolean ischeck = false;
         do {
-            System.out.println("Mời bạn nhập mật khẩu:");
             try {
                 password = sc.nextLine();
                 if (!Pattern.matches(PASSWORD_REGEX, password))
@@ -28,7 +28,7 @@ public class Input {
     }
 
     public String enterEmail() {
-        String email =null;
+        String email = null;
         boolean ischeck = false;
         do {
             try {

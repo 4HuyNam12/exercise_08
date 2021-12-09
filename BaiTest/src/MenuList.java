@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 public class MenuList {
     UserService service = new UserService();
     Scanner sc = new Scanner(System.in);
+
     public void menu(ArrayList<User> listAll) {
         String userName;
         String menu = """
@@ -23,9 +24,9 @@ public class MenuList {
             switch (choice) {
                 case 1 -> {
                     userName = service.login(listAll);
-                    subMenu(userName,listAll);
+                    subMenu(userName, listAll);
                 }
-                case 2 ->service.createNewAccount(listAll);
+                case 2 -> service.createNewAccount(listAll);
                 case 3 -> System.exit(1);
             }
         } while (choice != 0);
@@ -56,15 +57,15 @@ public class MenuList {
             } while (!ischeck);
             switch (choice) {
                 case "1" -> {
-                    service.changeUser(userName,listAll);
+                    service.changeUser(userName, listAll);
                     System.out.println("Thay đổi user thành công");
                 }
                 case "2" -> {
-                    service.changeEmail(userName,listAll);
+                    service.changeEmail(userName, listAll);
                     System.out.println("Thay đổi email thành công");
                 }
                 case "3" -> {
-                    service.changePassword(userName,listAll);
+                    service.changePassword(userName, listAll);
                     System.out.println("Thay đổi password thành công");
                 }
                 case "4" -> {

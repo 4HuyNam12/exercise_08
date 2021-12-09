@@ -3,22 +3,23 @@ import java.util.Scanner;
 
 public class UserService {
     Scanner sc = new Scanner(System.in);
-    String userName ;
-    String email ;
+    String userName;
+    String email;
     String password;
     Input input = new Input();
 
     public String login(ArrayList<User> listAll) {
-        boolean ischeck = false;
-        do {
+        boolean checklogin = false;
+        listAll.stream().forEach(System.out::println);
+        while (!checklogin) {
             userName = input.enterUsername();
-            for (User user : listAll) {
-                if (!userName.equals(user.getUserName())) {
-                    System.out.println("Bạn đã nhập sai userName");
-                } else {
-                    System.out.println("Nhập mật khẩu");
+            int count = 0;
+            for (int i = 0; i < listAll.size(); i++) {
+                if (userName.equals(listAll.get(i).getUserName())) {
+                    count++;
+                    System.out.println("Nhập mật khẩu: ");
                     password = sc.nextLine();
-                    if (!password.equals(user.getPassword())) {
+                    if (!password.equals(listAll.get(i).getPassword())) {
                         System.out.println("Bạn đã nhập sai mật khẩu");
                         System.out.println("Mời lựa chọn");
                         System.out.println("1-Đăng nhập lại");
@@ -30,13 +31,15 @@ public class UserService {
                         }
                     } else {
                         System.out.println("Chào mừng: " + userName);
-                        ischeck = true;
+                        checklogin = true;
+                        break;
                     }
                 }
-                break;
+            }
+            if (count == 0) {
+                System.out.println("Bạn đã nhập sai userName");
             }
         }
-        while (!ischeck);
         return userName;
     }
 
@@ -44,19 +47,22 @@ public class UserService {
         MenuList menuList = new MenuList();
         System.out.println("Mời bạn nhập email đăng ký: ");
         email = sc.nextLine();
+        int count = 0;
         for (User user : listAll) {
-            if (!email.equals(user.getEmail())) {
-                System.out.println("Chưa tồn tại tài khoản!");
-            } else {
+            if (email.equals(user.getEmail())) {
                 System.out.println("Chào mừng :" + user.getUserName());
+                System.out.println("Mời bạn nhập mật khẩu mới: ");
                 password = input.enterPassword();
                 System.out.println("Thay đổi mật khẩu thành công.");
                 user.setUserName(user.getUserName());
                 user.setEmail(email);
                 user.setPassword(password);
                 menuList.menu(listAll);
+                count++;
             }
-            break;
+        }
+        if (count == 0) {
+            System.out.println("Chưa tồn tại tài khoản!");
         }
     }
 
@@ -74,10 +80,10 @@ public class UserService {
                 }
             }
         } while (!ischeck);
+        System.out.println("Mời bạn nhập mật khẩu: ");
         password = input.enterPassword();
         System.out.println("Chúc mừng bạn đã đăng ký thành công !");
-        listAll.add(new User(userName,email,password));
-
+        listAll.add(new User(userName, email, password));
     }
 
 
@@ -91,6 +97,7 @@ public class UserService {
     }
 
     public void changePassword(String userName, ArrayList<User> listAll) {
+        System.out.println("Mời bạn nhập mật khẩu mới: ");
         String password = input.enterPassword();
         for (User user : listAll) {
             if (userName.equals(user.getUserName())) {
